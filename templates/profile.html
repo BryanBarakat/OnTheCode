@@ -1,0 +1,77 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel='stylesheet' href="{% static 'profile.css' %}">
+    <link rel="preconnect" href="static 'https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lobster&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="static 'https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="'https://fonts.googleapis.com/css2?family=Assistant:wght@300&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
+    <title>Document</title>
+</head>
+<body>
+    <div class="container">
+        <div class="back-home">
+            <h2><a href='/'><img src="{% static 'home.png' %}" alt=''></a>&nbsp; / &nbsp;<span>{{current_user}}</span>'s Profile</h2>
+        </div>
+        <div class="profile-details">
+            <div class="profile-image">
+                <img src="{{image.url}}" alt=''>
+            </div>
+            <form action='/follow' method='POST' id='formulaire'>
+
+                {% csrf_token %}
+
+
+                <div class="stats">
+                    <div class="first-line">
+                        <div class="username">{{current_user}}</div>
+
+                        <input type='hidden' value="{{request.user}}" name='follower'/>
+                        <input type='hidden' value="{{current_user}}" name='user'/>
+
+                        {% if current_user == request.user %}
+                            <a href='/settings'>Edit Profile</a>
+                        {% else %}
+                            <button type='submit' form='formulaire'><a>{{button_text}}</a></button>
+                        {% endif %}
+                    </div>
+                    <div class="second-line">
+                        {% if user_post_length == 1 %}
+                            <div class="posts"><span>{{user_post_length}}</span> post</div>
+                        {% else %}
+                            <div class="posts"><span>{{user_post_length}}</span> posts</div>
+                        {% endif %}
+                        {% if user_followers == 1%}
+                            <div class="followers"><span>{{user_followers}}</span> follower</div>
+                        {% else %}
+                            <div class="followers"><span>{{user_followers}}</span> followers</div>
+                        {% endif %}
+                        <div class="followings"><span>{{user_following}}</span> following</div>
+                    </div>
+                    <div class="sub-cap">
+                        <div class="third-line">{{user_name}}</div>
+                        <div class="bios">{{bio}}</div>
+                        <div class="fourth-line"><a href={{website}}>{{website}}</a></div>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <hr>
+        <div class="posts2">
+            {% for post in user_posts %}
+                <img src={{post.url}} alt=''>
+            {% endfor %}
+        </div>
+    </div>
+</body>
+</html>

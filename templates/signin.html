@@ -1,0 +1,64 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel='stylesheet' href = "{% static 'signin.css' %}">
+    <link rel="preconnect" href="static 'https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lobster&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="static 'https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="'https://fonts.googleapis.com/css2?family=Assistant:wght@300&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
+    <title>Document</title>
+</head>
+<body>
+    <nav>
+        <ul>
+            <li class="title"><a href="/signin">onTheCode</a></li>
+            <li><a class="login" href="/signup">Register</a></li>
+        </ul>
+    </nav>
+    <div class="container">
+        <h1>Sign in</h1>
+        <form action="" method="POST" id='form2' autocomplete="off">
+            {% csrf_token %}
+            <ul>
+                <li><input name="username-login" type='name' placeholder='Username' required></li>
+                <li><input name='password-login' type='password' placeholder='Password' autocomplete="new-password" required></li>
+                <div class="remember-forgot">
+                    <li><input type='checkbox' id='checkboxed' name='checkboxed'>&nbsp;&nbsp;<label for="checkboxed">Remember me</label></li>
+                    <li class='forgot'><a href=''>Forgot your password?</a></li>
+                </div>
+                <div class='messages'>
+                    {% for message in messages %}
+                    <h5>{{message}}</h5>
+                    {% endfor %}
+                </div>
+                <li class='starts'><button type="submit" form="form2" href="{% static '#' %}">Sign in</button></li>
+            </ul>
+        </form>
+        <h3>Not registered? <a href="/signup">Create an account</a></h3>
+    </div>
+    <footer>
+        <ul>
+            <div class='terms'>
+                <li><a href="{% static '#' %}">About</a></li>
+                <li><a href="{% static '#' %}">Help</a></li>
+                <li><a href="{% static '#' %}">Terms and Services</a></li>
+                <li><a href="{% static '#' %}">Privacy</a></li>
+            </div>
+            <div class="copyright">
+                <li>&copy Copyright 2022 by onTheCode</li>
+            </div>
+        </ul>
+    </footer>
+    <script src="{% static 'main.js' %}"></script>
+</body>
+</html>

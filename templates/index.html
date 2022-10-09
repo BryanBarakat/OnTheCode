@@ -1,0 +1,141 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="{% static 'style.css' %}" rel="stylesheet">
+    <link rel="preconnect" href="static 'https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lobster&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="static 'https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="'https://fonts.googleapis.com/css2?family=Assistant:wght@300&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
+    <title>onthecode</title>
+</head>
+<body>
+    <nav>
+            <ul>
+
+                <div class="title" id='title'>
+                    <li><a href="/">onTheCode</a></li>
+                </div>
+                <div class="search-bar">
+                    <li>
+                        <form action='/search' method='POST'>
+                            {% csrf_token %}
+                        <input type="search" name='username' id="searched" onkeypress="myFunc()">
+                        <button type='submit' class='button-search'><img src="{% static 'enter.png' %}" alt=''></button>
+                        </form>
+                        <div class="inp-placeholder" id="searching"><p>Search</p></div>
+                        <div class="img-input" id="img-input"><img src="{% static 'search.png' %}" alt=""></div>
+                    </li>
+                </div>
+                <div class="options">
+                    <li class="share-code"><button id='share-nav'>Share your Code</button></li>
+                    <li class="home" id ='home-nav'><a href="/"><img src="{% static 'home.png' %}" alt=""></a></li>
+                    <li class="profile" id="profile"><img src="{{image.url}}" alt=""></li>
+                </div>
+            </ul>
+    </nav>
+    <div class="block-options" id='options'>
+        <ul>
+            <li><a href="/settings"><img src="{% static 'set.png' %}" alt=''>&nbsp;&nbsp;Account settings</a></li>
+            <li id='posting-today'><a href="#"><img src="{% static 'coding-help.png' %}" alt=''>&nbsp;&nbsp;Post</a></li>
+            <li><a href="/profile/{{request.user.username}}"><img src="{% static 'user-profile.png' %}" alt=''>&nbsp;&nbsp;Profile</a></li>
+            <li><a href="logout"><img src="{% static 'exit.png' %}" alt=''>&nbsp;&nbsp;Log out</a></li>
+        </ul>
+    </div>
+    <div class="block-post" id='post'>
+        <form action='upload' method='POST' id='form4' autocomplete="off" enctype='multipart/form-data'>
+
+            {% csrf_token %}
+
+            <ul id='options_posted'>
+                <div class="postage">
+                    <input type='file' name='file-post'>
+                </div>
+                <div class="description">
+                    <label for='desc-post'>Describe your post</label>&nbsp;&nbsp;
+                <textarea name='desc-post' placeholder='Start bragging...'></textarea>
+                </div>
+                <button type='submit' form="form4">Share</button>
+            </ul>
+        </form>
+        <div class="image-post"><img src="{% static 'back-color.jpg' %}" alt=''><span><img src="{% static 'add-image.png' %}" alt=''></span></div>
+    </div>
+    {% for post in posts reversed %}
+        <div class="post-template">
+            <div class="post-top">
+                <div class="user-post"><img src={{user.url}} alt=''>&nbsp;&nbsp;<a href='/profile/{{post.user}}'>{{post.user}}</a></div>
+                <div class="more"><img id='more' src="{% static 'more.png' %}" alt=''></div>
+            </div>
+            <div class="post-image">
+                <img src={{post.image.url}} alt=''>
+            </div>
+            <div class="post-options">
+                <div class="circles">
+                    <a href='/like-post?post_id={{post.id}}'><img class='circle1' src="{% static 'circle.png' %}" alt=''></a>
+                    <img id='more' src="{% static 'comment.png' %}" alt=''>
+                </div>
+
+                <div class="book-solved">
+                    &nbsp;&nbsp;
+                    <a href={{post.image.url}} download><img id='save-img' src="{% static 'download.png' %}" alt=''></a>
+                </div>
+            </div>
+            <div class="comment-section">
+                <div class="likedP">
+                    {% if post.no_of_likes == 0%}
+                    <p>No likes</p>
+                    {% elif post.no_of_likes == 1%}
+                    <p>Liked by {{post.no_of_likes}} person</p>
+                    {% else %}
+                    <p>Liked by {{post.no_of_likes}} people</p>
+                    {% endif %}
+                </div>
+                <div class="description-post"><a href='/profile/{{post.user}}'>{{post.user}}</a>&nbsp;&nbsp;<span>{{post.caption}}</span></div>
+                <div class="all-comments"><h4>View all other comments</h4></div>
+                <div class="name1">bolder&nbsp;&nbsp;<span>He's so handsome</span></div>
+                <div class="name2">Jackiecheese&nbsp;&nbsp;<span>omg omg he's the lord</span></div>
+                <input id='say-something' type='text' name='comment-text' placeholder='Say something...'>
+                <div class="posted-on"><h4>Posted on <span>{{post.created_at}}</span></h4></div>
+            </div>
+        </div>
+    {% endfor %}
+    <div class="recommendations">
+        <div class="head-recom">
+            <h2>Users you can follow</h2>
+            <h4>Refresh</h4>
+        </div>
+        <br>
+        {% for suggestion in suggestions_username_profile_list %}
+            <ul>
+                <li>
+                    <div class="image-recom">
+                        <img src="{% static 'Bryan.png' %}" alt=''>
+                    </div>
+                </li>
+                <li>
+                    <div class="name-followers">
+                        <div class="name-recom">{{suggestion.user}}</div>
+                        <div class="followers-recom">{{suggestion.bio|truncatewords:3}}</div>
+                    </div>
+                </li>
+                <li>
+                    <div class="button-follow">
+                        <button type='submit'><a href='/profile/{{suggestion.user}}'>View Profile</a></button>
+                    </div>
+                </li>
+            </ul>
+            <hr>
+        {% endfor %}
+    </div>
+    <script src="{% static 'main.js' %}"></script>
+</body>
+</html>

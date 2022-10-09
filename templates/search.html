@@ -1,0 +1,59 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="{% static 'search.css' %}" rel="stylesheet">
+    <link rel="preconnect" href="static 'https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lobster&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="static 'https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="'https://fonts.googleapis.com/css2?family=Assistant:wght@300&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
+    <title>onthecode</title>
+</head>
+<body>
+    <nav>
+        <form action='/search' method='POST'>
+            <ul>
+
+                {% csrf_token %}
+
+                <div class="search-bar">
+                    <li>
+                        <input type="search" name='username' id="searched" onkeypress="myFunc()">
+                        <button type='submit' class='button-search'><img src="{% static 'enter.png' %}" alt=''></button>
+                        <div class="inp-placeholder" id="searching"><p>Search</p></div>
+                        <div class="img-input" id="img-input"><img src="{% static 'search.png' %}" alt=""></div>
+                    </li>
+                </div>
+                <div class="title" id='title'>
+                    <li><a href="/">onTheCode</a></li>
+                </div>
+            </ul>
+        </form>
+    </nav>
+    <div class="container">
+        <h2>Results for {{username}}</h2>
+        {% for user in username_profile_list %}
+            <a href="/profile/{{user.user}}"><div class="box">
+                <div class="imagerie">
+                    <img src={{user.profile_image.url}} alt=''>
+                </div>
+                <div class="rest">
+                    <div class="username-tag">@{{user.user}}</div>
+                    <div class="location">{{user.location}}</div>
+                    <div class="biography">{{user.bio}}</div>
+                </div>
+            </div></a>
+        {% endfor %}
+    </div>
+    <script src="{% static 'main.js' %}"></script>
+</body>
+</html>

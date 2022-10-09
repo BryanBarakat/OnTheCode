@@ -1,0 +1,236 @@
+*,html{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body{
+    background-color: #303030;
+    color: #f4f4f4;
+    font-family: 'Poppins', sans-serif;
+    user-select: none;
+}
+
+nav .title h1 img{
+    width: 26px;
+    height: 26px;
+    filter: invert(1);
+    vertical-align: sub;
+}
+
+nav{
+    display: flex;
+    justify-content: space-between;
+    padding: 40px 200px;
+}
+
+hr{
+    margin-left: auto;
+    margin-right: auto;
+    width: 80vw;
+    border: 1px solid grey;
+}
+
+nav .hey{
+    font-style: italic;
+}
+
+nav .hey span{
+    color: beige;
+    text-transform: capitalize;
+}
+
+.container{
+    display: grid;
+    grid-template-columns: repeat(2,1fr);
+    justify-content: center;
+    margin-top: 50px;
+    margin-left: 300px;
+    margin-right: 500px;
+}
+
+.container .side-container a{
+    font-size: 20px ;
+    text-decoration: none;
+    color: #f4f4f4;
+}
+
+.main-container{
+    border: 2px solid white;
+    border-radius: 7px;
+    background-color: #f4f4f4;
+    padding-top: 30px;
+    padding-bottom: 30px;
+    padding-left: 40px;
+    padding-right: 100px;
+    box-shadow: 0 3px 10px rgb(0 0 0 / 0.2);
+}
+
+label img,input[type='file']{
+    cursor: pointer;
+}
+
+input[type='file']{
+    border: none;
+    outline: none;
+    font-family: 'Poppins',sans-serif;
+    font-size: 14px;
+    border-radius: 7px;
+    background-color: #454545;
+}
+
+.container ul{
+    display: flex;
+    flex-direction: column;
+    justify-content:start;
+    align-items: center;
+    gap: 20px;
+}
+
+.container ul img{
+    width: 100px;
+    height: 100px;
+}
+
+.container ul li{
+    list-style: none;
+}
+
+.main-container form{
+    text-align: left;
+}
+
+label{
+    font-size: 16px;
+    color: #303030;
+}
+
+input[type='name'],input[type='url'],input[type='text']{
+    padding-top: 10px;
+    padding-bottom: 10px;
+    padding-left: 20px;
+    padding-right: 200px;
+    outline: none;
+    border: none;
+    border-radius: 5px;
+} 
+
+textarea{
+    padding-top: 10px;
+    padding-bottom: 60px;
+    padding-left: 20px;
+    padding-right: 220px;
+    outline: none;
+    border: none;
+    border-radius: 5px;
+}
+
+.buttons button,.buttons a{
+    border: none;
+    outline: none;
+    font-family: 'Poppins',sans-serif;
+    padding: 10px 40px;
+    border-radius: 5px;
+    cursor: pointer;
+    text-decoration: none;
+}
+
+.buttons{
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+    justify-content: center;
+    align-items: center;
+}
+
+.button-save{
+    color: #f4f4f4;
+    background-color: #454545;
+}
+
+.buttons a{
+    font-size: 14px;
+    text-decoration: none;
+    background-color: white;
+    color: #454545;
+}
+
+.buttons a:hover{
+    color: #f4f4f4;
+    background-color: #454545;
+}
+
+.button-save:hover{
+    background-color: white;
+    color: #454545;
+}
+
+@media only screen and (max-width: 1350px){
+    .container .side-container a{
+        display: none;
+        visibility: hidden;
+    }
+
+    .container{
+        display: grid;
+        grid-template-columns: repeat(2,1fr);
+        justify-content: center;
+        align-items: center;
+        margin-left:  50%;
+        transform: translateX(-50%);
+        margin-right: 0px;
+        margin-top: 15px;
+    }
+    
+}
+
+@media only screen and (max-width: 1100px){
+    nav{
+        padding: 40px 20px;
+    }
+}
+
+@media only screen and (max-width: 700px){
+    nav{
+        font-size: 10px;
+    }
+
+        
+    .main-container{
+        padding-left: 20px;
+        padding-right: 50px;
+    }
+}
+
+@media only screen and (max-width: 500px){        
+    .main-container{
+        padding-left: 10px;
+        padding-right: 25px;
+    }
+
+    nav .title h1 span{
+        display: none;
+    }
+
+    input[type='name'],input[type='url'],input[type='text']{
+        padding-top: 10px;
+        padding-bottom: 10px;
+        padding-left: 20px;
+        padding-right: 50px;
+    } 
+
+    textarea{
+        padding-top: 10px;
+        padding-bottom: 60px;
+        padding-left: 20px;
+        padding-right: 100px;
+    }
+}
+
+@media only screen and (max-width: 350px){
+    .main-container{
+        width: 100vw;
+        padding-left: 0;
+        padding-right: 0;
+    }
+}

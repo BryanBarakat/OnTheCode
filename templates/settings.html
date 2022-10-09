@@ -1,0 +1,71 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel='stylesheet' href="{% static 'settings.css' %}">
+    <link rel="preconnect" href="static 'https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lobster&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="static 'https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="'https://fonts.googleapis.com/css2?family=Assistant:wght@300&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
+    <title>Document</title>
+</head>
+<body>
+    <nav>
+        <div class='title'>
+            <h1><a href='/'><img src="{% static 'home.png' %}" alt=''></a>&nbsp;<span> / Account Setting</span></h1>
+        </div>
+        <div class="hey">
+            <h1>Your profile is you, <span>{{user.username}}</span>.</h1>
+        </div>
+    </nav>
+    <hr>
+    <div class="container">
+        <div class="side-container">
+            <a href="/settings">General</a>
+        </div>
+        <div class="main-container">
+            <form action='' method='POST' id='form3' autocomplete="off" enctype='multipart/form-data'>
+
+                {% csrf_token %}
+
+                <ul>
+                    <li>
+                        <label for='image'><img id='image-profile' src="{{user_profile.profile_image.url}}" alt='' /></label>&nbsp;&nbsp;
+                        <input type="file" name='image' id='image'>
+                    </li>
+                    <li>
+                        <label for='name'>Name</label>&nbsp;&nbsp;
+                        <input value='{{user_profile.sur_name}}' type="name" name='name' id="name" placeholder='Name'>
+                    </li>
+                    <li class='text-a'>
+                        <label for='bio'>Bio</label>&nbsp;&nbsp;
+                        <textarea id='bio' name='bio' placeholder='Describe yourself...'>{{user_profile.bio}}</textarea>
+                    </li>
+                    <li>
+                        <label for='url'>Website</label>&nbsp;&nbsp;
+                        <input value='{{user_profile.website}}' id='url' type="url" name='website' placeholder='Have a website?'>
+                    </li>
+                    <li>
+                        <label for='location'>Location</label>&nbsp;&nbsp;
+                        <input id-'location' value='{{user_profile.location}}' type="text" name='location' placeholder='Where are you from'>
+                    </li>
+                    <div class="buttons">
+                        <button class='button-save' type="submit" form="form3">Save</button>
+                        <a href='/'>Cancel</a>
+                    </div>
+                </ul>
+            </form>
+        </div>
+    </div>
+    <script src="{% static 'main.js' %}"></script>
+</body>
+</html>
